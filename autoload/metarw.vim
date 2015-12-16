@@ -211,7 +211,7 @@ endfunction
 function! s:available_schemes()  "{{{2
   return sort(map(
   \        split(globpath(&runtimepath, 'autoload/metarw/*.vim'), "\n"),
-  \        'substitute(v:val, ''^.*/\([^/]*\)\.vim$'', ''\1'', '''')'
+  \        'substitute(v:val, ''^.*[\\/]\([^\\/]*\)\.vim$'', ''\1'', '''')'
   \      ))
 endfunction
 
