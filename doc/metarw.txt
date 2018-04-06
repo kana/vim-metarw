@@ -204,6 +204,9 @@ metarw#{scheme}#read({fakepath})		*metarw#{scheme}#read()*
 			"read"		A string which will be given to
 					|:read| to read the content of
 					{fakepath}.
+
+                                        Or, a |Funcref| to return a list of
+                                        lines from {fakepath}.
 					       *metarw#{scheme}#read()-browse*
 			"browse"	A list to set up
 					|metarw-content-browser|.
@@ -244,7 +247,8 @@ metarw#{scheme}#write({fakepath}, {line1}, {line2}, {append-p})
 					       *metarw#{scheme}#write()-write*
 			"write"		The second item must be a string which
 					will be given to |:write| to write the
-					content of {fakepath}.
+					content of {fakepath}, or must be
+                                        a |Funcref| to write to {fakepath}.
 
 					The third item is optional; if it is
 					given, it must be a string which is
