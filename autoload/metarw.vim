@@ -219,8 +219,11 @@ endfunction
 
 
 function! s:read(arg)  "{{{2
-  execute 'read' v:cmdarg a:arg
-  return
+  if type(a:arg) == v:t_func
+    put =a:arg()
+  else
+    execute 'read' v:cmdarg a:arg
+  endif
 endfunction
 
 
