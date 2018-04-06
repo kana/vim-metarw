@@ -7,3 +7,12 @@ function! metarw#seq#read(fakepath)
   \   to,
   \ )]
 endfunction
+
+function! metarw#seq#write(fakepath, line1, line2, append_p)
+  let [scheme, name] = split(a:fakepath, ':')
+
+  return ['write', printf(
+  \   '!cat >"%s"',
+  \   name,
+  \ )]
+endfunction
