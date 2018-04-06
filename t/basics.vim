@@ -24,4 +24,10 @@ describe 'metarw'
     Expect filereadable(',out') to_be_true
     Expect readfile(',out') ==# map(range(5, 10), {_, v -> string(v)})
   end
+
+  it 'enables to read from a fakepath via Funcref'
+    Expect getline(1, '$') ==# ['']
+    edit func:range(8,8+8)
+    Expect getline(1, '$') ==# map(range(8, 16), {_, v -> string(v)})
+  end
 end
