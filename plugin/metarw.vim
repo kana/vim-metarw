@@ -1,5 +1,5 @@
 " metarw - a framework to read/write a fake:path
-" Version: 0.0.5
+" Version: 0.1.0
 " Copyright (C) 2008-2009 kana <http://whileimautomaton.net/>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
