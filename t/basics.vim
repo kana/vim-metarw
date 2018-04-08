@@ -17,12 +17,14 @@ describe 'metarw'
     put =range(5, 10)
     1 delete _
     Expect getline(1, '$') ==# map(range(5, 10), {_, v -> string(v)})
+    Expect bufname('') ==# ''
     Expect &l:modified to_be_true
     Expect filereadable(',out') to_be_false
 
     write seq:,out
 
     Expect filereadable(',out') to_be_true
+    Expect bufname('') ==# 'seq:,out'
     Expect &l:modified to_be_false
     Expect readfile(',out') ==# map(range(5, 10), {_, v -> string(v)})
   end
