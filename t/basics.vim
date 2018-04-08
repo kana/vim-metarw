@@ -17,11 +17,15 @@ describe 'metarw'
     put =range(5, 10)
     1 delete _
     Expect getline(1, '$') ==# map(range(5, 10), {_, v -> string(v)})
+    Expect bufname('') ==# ''
+    Expect &l:modified to_be_true
     Expect filereadable(',out') to_be_false
 
     write seq:,out
 
     Expect filereadable(',out') to_be_true
+    Expect bufname('') ==# 'seq:,out'
+    Expect &l:modified to_be_false
     Expect readfile(',out') ==# map(range(5, 10), {_, v -> string(v)})
   end
 
@@ -46,5 +50,26 @@ describe 'metarw'
 
     Expect filereadable(',out') to_be_true
     Expect readfile(',out') ==# ['17', '18', '19', '1']
+  end
+
+  it 'enables to write to a fakepath via Funcref'
+    put =range(5, 10)
+    1 delete _
+    Expect getline(1, '$') ==# map(range(5, 10), {_, v -> string(v)})
+    Expect bufname('') ==# ''
+    Expect &l:modified to_be_true
+    Expect filereadable(',out') to_be_false
+
+    function! Rename(lines, name)
+      file `='func:xyzzy'`
+      call writefile(a:lines, a:name)
+    endfunction
+
+    write func:Rename(getline(a:line1,a:line2)+[a:append_p],',out')
+
+    Expect filereadable(',out') to_be_true
+    Expect readfile(',out') ==# ['5', '6', '7', '8', '9', '10', '0']
+    Expect bufname('') ==# 'func:xyzzy'
+    Expect &l:modified to_be_false
   end
 end
