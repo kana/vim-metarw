@@ -297,6 +297,9 @@ endfunction
 
 
 function! s:write(scheme, fakepath, line1, line2, event_name)  "{{{2
+  " The current buffer name might be renamed by a scheme script.
+  let bufname = bufname('')
+
   let _ = metarw#{a:scheme}#write(a:fakepath, a:line1, a:line2,
   \                               a:event_name ==# 'FileAppendCmd')
   if _[0] ==# 'write'
@@ -318,7 +321,7 @@ function! s:write(scheme, fakepath, line1, line2, event_name)  "{{{2
     endif
   endif
   if _[0] !=# 'error'
-  \  && a:event_name ==# 'BufWriteCmd' && a:fakepath ==# bufname('')
+  \  && a:event_name ==# 'BufWriteCmd' && a:fakepath ==# bufname
     " The whole buffer has been saved to the current fakepath, so 'modified'
     " should be reset.
     setlocal nomodified
