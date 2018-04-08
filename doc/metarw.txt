@@ -301,6 +301,10 @@ BUGS						*metarw-bugs*
 ==============================================================================
 CHANGELOG					*metarw-changelog*
 
+0.1.1	2018-04-09T02:53:34+09:00		*metarw-changelog-0.1.1*
+        - Fix a bug that 'modified' is not reset on |:write| if a scheme
+          script renames the buffer name.
+
 0.1.0	2018-04-06T23:53:13+09:00		*metarw-changelog-0.1.0*
 	- Vim 8.0 or later is required.
         - |Funcref| can be used to |metarw#{scheme}#read()| and
