@@ -26,6 +26,8 @@
 let s:FALSE = 0
 let s:TRUE = !s:FALSE
 
+let s:is_preparing_to_edit = s:FALSE
+
 
 
 
@@ -87,6 +89,13 @@ endfunction
 
 
 
+function! metarw#is_preparing_to_edit()  "{{{2
+  return s:is_preparing_to_edit
+endfunction
+
+
+
+
 function! metarw#_event_handler(event_name)  "{{{2
   let fakepath = expand('<afile>')
   let scheme = s:scheme_of(fakepath)
@@ -94,7 +103,9 @@ function! metarw#_event_handler(event_name)  "{{{2
     return s:FALSE
   endif
 
+  let s:is_preparing_to_edit = a:event_name ==# 'BufReadCmd'
   let _ = s:on_{a:event_name}(scheme, fakepath)
+  let s:is_preparing_to_edit = s:FALSE
   if _[0] ==# 'error'
     echoerr _[1].':' fakepath
   endif

@@ -101,6 +101,15 @@ metarw#define_wrapper_commands({override-p})
 			Define wrapper commands (see |metarw-commands|.)
 			Override existent commands if {override-p} is true.
 
+					    *metarw#is_preparing_to_edit()*
+metarw#is_preparing_to_edit()
+			Return true if the current context is preparing to
+			|:edit| a fakepath rather than to |:read| it.
+			Otherwise, return false.
+			
+			This is useful if you need special configuration for
+			interactive editing which is not necessary for :read.
+
 
 ------------------------------------------------------------------------------
 KEY MAPPINGS					*metarw-key-mappings*
@@ -144,6 +153,19 @@ as a content browser like |newrw|'s one for the given fakepath.
 In this content browser, |metarw-key-mappings| are available, and 'filetype'
 of a content browser is set to "metarw".  Use this information for your own
 customization.
+
+						*metarw-browser-item*
+Each item displayed in the content browser is represented as a |Dictionary|.
+The following keys are available:
+
+label		(string, required)
+        The label of the item which is displayed in the content browser.
+
+fakepath	(string, required)
+	The fakepath to open the item by |<Plug>(metarw-open-here)| etc.
+
+The first item should be the "parent" of the current {fakepath}, and it is
+used for |<Plug>(metarw-go-to-parent)|.
 
 
 
@@ -205,29 +227,13 @@ metarw#{scheme}#read({fakepath})		*metarw#{scheme}#read()*
 					|:read| to read the content of
 					{fakepath}.
 
-                                        Or, a |Funcref| to return a list of
-                                        lines from {fakepath}.
-					       *metarw#{scheme}#read()-browse*
-			"browse"	A list to set up
-					|metarw-content-browser|.
+					Or, a |Funcref| to return a list of
+					lines from {fakepath}.
+						*metarw#{scheme}#read()-browse*
+			"browse"	A list of |metarw-brower-item|s to
+					set up |metarw-content-browser|.
 
-			If the second item of return value is a list, each
-			item in the list is a dictionary which represents an
-			item in {fakepath}.  The meaning of key-value pairs
-			are:
-
-			"label" (string) /required/
-				Displayed as the label of the item.
-
-			"fakepath" (string) /required/
-				Used to open an item by
-				|<Plug>(metarw-open-here)| or other ways.
-
-			And, the first item should be the "parent" of
-			{fakepath}.  This item is used for
-			|<Plug>(metarw-go-to-parent)|.
-
-			See also |metarw-content-browser|.
+			See also |metarw#is_preparing_to_edit()|.
 
 						*metarw#{scheme}#write()*
 metarw#{scheme}#write({fakepath}, {line1}, {line2}, {append-p})
