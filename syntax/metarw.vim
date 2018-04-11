@@ -1,5 +1,5 @@
 " Vim syntax: metarw - for content browser of metarw
-" Version: 0.1.1
+" Version: 0.2.0
 " Copyright (C) 2008-2018 Kana Natsuno <http://whileimautomaton.net/>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
