@@ -101,6 +101,15 @@ metarw#define_wrapper_commands({override-p})
 			Define wrapper commands (see |metarw-commands|.)
 			Override existent commands if {override-p} is true.
 
+					    *metarw#is_preparing_to_edit()*
+metarw#is_preparing_to_edit()
+			Return true if the current context is preparing to
+			|:edit| a fakepath rather than to |:read| it.
+			Otherwise, return false.
+			
+			This is useful if you need special configuration for
+			interactive editing which is not necessary for :read.
+
 
 ------------------------------------------------------------------------------
 KEY MAPPINGS					*metarw-key-mappings*
@@ -223,6 +232,8 @@ metarw#{scheme}#read({fakepath})		*metarw#{scheme}#read()*
 						*metarw#{scheme}#read()-browse*
 			"browse"	A list of |metarw-brower-item|s to
 					set up |metarw-content-browser|.
+
+			See also |metarw#is_preparing_to_edit()|.
 
 						*metarw#{scheme}#write()*
 metarw#{scheme}#write({fakepath}, {line1}, {line2}, {append-p})
