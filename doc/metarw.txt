@@ -307,6 +307,9 @@ BUGS						*metarw-bugs*
 ==============================================================================
 CHANGELOG					*metarw-changelog*
 
+0.2.0	2018-04-11T22:10:10+09:00		*metarw-changelog-0.2.0*
+        - Add |metarw#is_preparing_to_edit()| for advanced use.
+
 0.1.1	2018-04-09T02:53:34+09:00		*metarw-changelog-0.1.1*
         - Fix a bug that 'modified' is not reset on |:write| if a scheme
           script renames the buffer name.
