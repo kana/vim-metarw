@@ -98,6 +98,10 @@ endfunction
 
 function! metarw#_event_handler(event_name)  "{{{2
   let fakepath = expand('<afile>')
+  if filereadable(fakepath)
+    execute '%!cat ' . fakepath
+    return s:FALSE
+  endif
   let scheme = s:scheme_of(fakepath)
   if s:already_hooked_p(a:event_name, scheme) || !s:available_scheme_p(scheme)
     return s:FALSE
